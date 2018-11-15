@@ -1,7 +1,10 @@
 <?php 
     if (session_status() == PHP_SESSION_NONE) {
-        session_start();
-        $_SESSION['status']='getAll';
+        session_start();  
+    }
+    
+    if(!isset($_SESSION['status'])){
+         $_SESSION['status']=' ';
     }
     
 require_once 'controler.php';
