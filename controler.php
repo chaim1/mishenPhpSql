@@ -5,21 +5,24 @@
 include_once 'business-logic-workers.php';
 $bl = new BusinessLogicWorker;
 $arrayOfWorker = $bl->get();
-if(empty($arreyOfErrors)){
+// if(empty($arreyOfErrors)){
 $arreyOfErrors = [];
-$hasErrors = false;}
+$hasErrors = false;
+// }
 
-if(empty($arreyOfErrors)){
+// if(empty($arreyOfErrors)){
 $arreyOfSuccess = [];
-$successful =false;}
+$successful =false;
+// }
 
-if(empty($arreyOfErrors)){
+// if(empty($arreyOfErrors)){
 $arreyOfErrorsIndex = [];
 $hasErrorsIndex = false;
-}
-if(empty($arreyOfErrors)){
+// }
+// if(empty($arreyOfErrors)){
 $arreyOfSuccessIndex = [];
-$successfulIndex =false;}
+$successfulIndex =false;
+// }
 
 // if(!isset($_POST['searchWorker'])){
     $valid = false;
@@ -62,6 +65,8 @@ if(isset($_POST['AddWorkerFimal'])){
         
     $bl->set($worker);
     $_SESSION['status']='getAll';
+    $successful = true;
+        array_push($arreyOfSuccess, "successful");
     include_once 'index.php';
 
     // header("location: index.php");
@@ -100,7 +105,9 @@ if(isset($_POST['UpdateWorker'])){
         ]);
         $bl->uupdate($worker);
         $_SESSION['status']='getAll';
-        header("location: index.php");
+        $successful = true;
+        array_push($arreyOfSuccess, "successful");
+    include_once 'index.php';
 }
 
 
