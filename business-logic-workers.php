@@ -31,6 +31,7 @@ include_once 'model-workers.php' ;
 
             );
             
+            
             $this->getDal()->insert($query,$param);
             
     }
@@ -41,17 +42,19 @@ include_once 'model-workers.php' ;
         $this->getDal()->delete($query);
     }
 
-    public function update($id)
+    public function uupdate($params)
     {
-        $query = "UPDATE `employee` SET `name`=:na, `beginningWork`=:bd, `id`=:id   WHERE `id`=:id";
-        $params = array(
+        $query = "UPDATE `employee` SET `name`=:na, `beginningWork`=:bd  WHERE `id`=:id";
+        $param = array(
 
-            "na" => $id->getId(),
-            "bd" => $id->getName(),
-            "id" => $id->getDate()
+            "na" => $params->getName(),
+            "bd" => $params->getDate(),
+            "id" => $params->getId()
 
         );
-        $this->getDal()->update($query,$params);
+        // var_dump($params);
+        //     die();
+        $this->getDal()->update($query,$param);
     }
 
     public function getOne($id)
@@ -71,3 +74,4 @@ include_once 'model-workers.php' ;
 
  
 ?>
+
