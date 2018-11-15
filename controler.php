@@ -21,6 +21,9 @@ if(empty($arreyOfErrors)){
 $arreyOfSuccessIndex = [];
 $successfulIndex =false;}
 
+// if(!isset($_POST['searchWorker'])){
+    $valid = false;
+// }
 
 
 
@@ -43,14 +46,14 @@ if(isset($_POST['getALL'])){
 
 if(isset($_POST['AddWorkerFimal'])){
     if(!empty($_POST['workerNumber'])&&!empty($_POST['workerName'])&&!empty($_POST['StartDate'])){
-//         $id=$_POST['contentSearch'];
-//      foreach ($arrayOfWorker as $item) {
-//         if($item->getId()==$id){
-//             $hasErrors = true;
-//         array_push($arreyOfErrors, "All must be full");
-//         header("location: index.php");
-// return
-//         }}
+        $id=$_POST['workerNumber'];
+     foreach ($arrayOfWorker as $item) {
+        if($item->getId()==$id){
+            $hasErrors = true;
+        array_push($arreyOfErrors, "An employee already exists");
+        include_once 'index.php';
+        return;
+        }}
     $worker = new WorkersModel([
         'id'=> $_POST['workerNumber'],
         'name'=> $_POST['workerName'],
@@ -59,13 +62,15 @@ if(isset($_POST['AddWorkerFimal'])){
         
     $bl->set($worker);
     $_SESSION['status']='getAll';
-    header("location: index.php");
+    include_once 'index.php';
+
+    // header("location: index.php");
 }else{
         $hasErrors = true;
         array_push($arreyOfErrors, "All must be full");
-        header("location: index.php");
+        // header("location: index.php");
 
-        // include_once 'index.php';
+        include_once 'index.php';
     }
 
 }
@@ -104,11 +109,18 @@ if(isset($_POST['searchWorker'])){
     $id=$_POST['contentSearch'];
      foreach ($arrayOfWorker as $item) {
         if($item->getId()==$id){
-           
+           $valid = true;
         }
     } 
-    $_SESSION['status']='Search';
-    $_SESSION['id']=$id;
-    $_SESSION['status2']='0';
-    header("location: index.php"); 
+    if($valid){
+        $_SESSION['status']='Search';
+        $_SESSION['id']=$id;
+        $_SESSION['status2']='0';
+        header("location: index.php");
+     }elseif(!$valid){
+        $hasErrorsIndex = true;
+        array_push($arreyOfErrorsIndex, "Employee does not exist ");
+        include_once 'index.php';
+        // return;
+    }
 }
