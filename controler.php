@@ -84,16 +84,16 @@ if(isset($_POST['update'])){
     header("location: index.php");
 
 }
-if(isset($_POST['UpdateWorkerv'])){
+if(isset($_POST['UpdateWorker'])){
     
     array_push($arreyOfSuccess, "Update Success");
         $successful =true;
         $worker = new WorkersModel([
-            'id'=> $_POST['workerNumber'],
+            'id'=> $_POST['idOfWorker'],
             'name'=> $_POST['workerName'],
             'beginningWork'=> $_POST['StartDate']
         ]);
-        $bl->update($worker);
+        $bl->uupdate($worker);
         $_SESSION['status']='getAll';
         header("location: index.php");
 }
