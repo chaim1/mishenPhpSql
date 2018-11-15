@@ -15,8 +15,9 @@ abstract class BusinessLogic
     abstract function get();
     abstract function set($param);
     abstract function delete($id);
-    abstract function update($id);
+    abstract function uupdate($id);
 }
+
 
 
 
